@@ -48,16 +48,15 @@ class ArticleForm extends Component
         if ($articleId > 0) {
             $this->article = Article::find($articleId);
             $this->article->fill($validatedData);
-            $this->save();
+            $this->article->save();
             $job = 'updated';
         } else {
-            $article = Article::create($validatedData);
+            $this->article = Article::create($validatedData);
             $job = 'created';
-
         }
 
-        if ($article instanceof Article) {
-            $this->success = 'Article #' . $article->getId() . ' ' . $job . ' successfully!';
+        if ($this->article instanceof Article) {
+            $this->success = 'Article #' . $this->article->getId() . ' ' . $job . ' successfully!';
         }
     }
 
