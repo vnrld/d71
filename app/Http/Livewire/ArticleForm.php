@@ -3,6 +3,9 @@
 namespace App\Http\Livewire;
 
 use App\Models\Article;
+use App\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Log;
 use Livewire\Component;
 
 class ArticleForm extends Component
@@ -28,8 +31,13 @@ class ArticleForm extends Component
 
     public string $publish_at = '';
 
-    public function submit(string $contents = '', int $articleId = 0)
+    public ?Collection $categories = null;
+
+    public function submit(string $contents = '', int $articleId = 0, $categories = null)
     {
+        Log::debug(print_r(func_get_args(), true), [__METHOD__]);
+        die();
+
         $validatedData = $this->validate(
             [
                 'title' => 'required|min:1',
@@ -63,7 +71,7 @@ class ArticleForm extends Component
     public function mount() {
         $this->articleId = (int)request()->segment(2);
 
-        var_dump($this->articleId);
+        $this->categories = Category::all();
 
         if ($this->articleId > 0) {
             /**

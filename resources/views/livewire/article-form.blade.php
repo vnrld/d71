@@ -13,7 +13,7 @@
             @endif
             <div class="h-full sm:flex">
                 <div class="flex items-center justify-center w-full p-10 bg-white">
-                    <form wire:submit.prevent="submit(document.querySelector('#contents').value, document.querySelector('#articleId').value)" method="POST" class="w-full">
+                    <form wire:submit.prevent="submit(document.querySelector('#contents').value, document.querySelector('#articleId').value, Array.from(document.querySelector('#categoriesList').querySelectorAll('option:checked'),e=>e.value))" method="POST" class="w-full">
                         @csrf
                         <div class="pb-3">
                             @error('title')
@@ -26,6 +26,14 @@
                             <p class="text-red-500 mt-1">{{ $message }}</p>
                             @enderror
                             <input wire:model="intro" class="w-full px-5 py-3 border border-gray-400 rounded-lg outline-none focus:shadow-outline" type="text" placeholder="Intro" name="intro" value="{{ old('intro') }}" />
+                        </div>
+                        <div class="py-3" wire:ignore>
+                            <select id="categoriesList" name="categoryList[]" multiple="multiple">
+                                <option value="0" selected="selected">---</option>
+                                @foreach($categories as $category)
+                                    <option value="{{$category->getId()}}">{{$category->getName()}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="py-3">
                             @error('contents')
