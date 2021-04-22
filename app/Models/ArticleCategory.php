@@ -15,6 +15,9 @@ class ArticleCategory extends GenericModel
     protected $table = 'articles_categories';
 
     protected $fillable = [
-        'name'
+        'article_id',
+        'category_id'
     ];
+
+    public $timestamps = false;
 }

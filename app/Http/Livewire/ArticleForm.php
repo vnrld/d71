@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Article;
+use App\Models\ArticleCategory;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
@@ -33,11 +34,8 @@ class ArticleForm extends Component
 
     public ?Collection $categories = null;
 
-    public function submit(string $contents = '', int $articleId = 0, $categories = null)
+    public function submit(string $contents = '', int $articleId = 0, array $categories = [])
     {
-        Log::debug(print_r(func_get_args(), true), [__METHOD__]);
-        die();
-
         $validatedData = $this->validate(
             [
                 'title' => 'required|min:1',
@@ -65,6 +63,12 @@ class ArticleForm extends Component
 
         if ($this->article instanceof Article) {
             $this->success = 'Article #' . $this->article->getId() . ' ' . $job . ' successfully!';
+
+            ArticleCategory::where('article_id', '=', $this->article->getId())->delete();
+            foreach ($categories as $category) {
+                ArticleCategory::create(['article_id' => $this->article->getId(), 'category_id' => $category]);
+            }
+
         }
     }
 
