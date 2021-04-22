@@ -66,7 +66,9 @@ class ArticleForm extends Component
 
             ArticleCategory::where('article_id', '=', $this->article->getId())->delete();
             foreach ($categories as $category) {
-                ArticleCategory::create(['article_id' => $this->article->getId(), 'category_id' => $category]);
+                if ($category > 0) {
+                    ArticleCategory::create(['article_id' => $this->article->getId(), 'category_id' => $category]);
+                }
             }
 
         }

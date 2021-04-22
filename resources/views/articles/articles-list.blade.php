@@ -9,7 +9,17 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    You're logged in!
+                    <table id="articles-list" style="border: #718096">
+                        <tr>
+                            <td>Title</td><td>Created At</td><td>Publish At</td><td></td>
+                        </tr>
+                        @foreach($articles as $article)
+                            <td>{{$article->getTitle()}}</td>
+                            <td>{{$article->getCreatedAt()}}</td>
+                            <td>{{$article->getPublishAt()}}</td>
+                            <td><a href="{{url('articles/' . $article->getId())}}">Edit</a></td>
+                        @endforeach
+                    </table>
                 </div>
             </div>
         </div>

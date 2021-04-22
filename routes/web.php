@@ -30,19 +30,15 @@ Route::get(
 )->middleware(['auth'])->name('dashboard');
 
 Route::get(
-    '/articles-list',
-    function () {
-        return view('articles/articles-list');
-    }
-)->middleware(['auth'])->name('dashboard.articles-list');
-
-Route::get(
     '/articles-create',
     function () {
         return view('articles/articles-create');
     }
 )->middleware(['auth'])->name('dashboard.articles-create');
 
+Route::get('/articles/list', [ArticleController::class, 'listArticles'])->middleware(['auth'])->name(
+    'dashboard.articles-list'
+);
 Route::get('/articles/{articleId}', [ArticleController::class, 'getArticle'])->middleware(['auth']);
 
 Route::get('/articles-categories', [CategoryController::class, 'all'])

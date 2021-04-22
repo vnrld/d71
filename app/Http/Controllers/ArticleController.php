@@ -22,4 +22,9 @@ class ArticleController extends Controller
             return redirect('/');
         }
     }
+
+    public function listArticles(): View
+    {
+        return \view('articles.articles-list')->with(['articles' => Article::all()]);
+    }
 }
