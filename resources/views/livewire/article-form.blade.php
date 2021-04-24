@@ -29,9 +29,16 @@
                         </div>
                         <div class="py-3" wire:ignore>
                             <select id="categoriesList" name="categoryList[]" multiple="multiple">
-                                <option value="0" selected="selected">---</option>
+                                <option value="0">---</option>
                                 @foreach($categories as $category)
-                                    <option value="{{$category->getId()}}">{{$category->getName()}}</option>
+                                    @php
+
+                                    $selected = '';
+                                    if (in_array($category->getId(), $this->selectedCategories, true)) {
+                                        $selected = 'selected="selected"';
+                                    }
+                                    echo '<option value="' . $category->getId() . '" ' . $selected . '>' . $category->getName() . '</option>';
+                                      @endphp
                                 @endforeach
                             </select>
                         </div>

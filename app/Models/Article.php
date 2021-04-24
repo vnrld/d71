@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+
 /**
  * Class Article
  * @package App\Models
@@ -24,5 +27,11 @@ class Article extends GenericModel
         'publish_at'
     ];
 
+    public $with = ['categories'];
+
+    public function categories(): BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'articles_categories', 'article_id', 'category_id');
+    }
 
 }

@@ -34,6 +34,8 @@ class ArticleForm extends Component
 
     public ?Collection $categories = null;
 
+    public array $selectedCategories = [];
+
     public function submit(string $contents = '', int $articleId = 0, array $categories = [])
     {
         $validatedData = $this->validate(
@@ -78,6 +80,7 @@ class ArticleForm extends Component
         $this->articleId = (int)request()->segment(2);
 
         $this->categories = Category::all();
+        $this->selectedCategories = [];
 
         if ($this->articleId > 0) {
             /**
@@ -85,10 +88,14 @@ class ArticleForm extends Component
              */
             $this->article = Article::find($this->articleId);
 
-            $this->title = $this->article->getTitle();
-            $this->intro = $this->article->getIntro();
-            $this->contents = $this->article->getContents();
-            $this->publish_at = $this->article->getPublishAt();
+            if ($this->article !== null) {
+
+                $this->selectedCategories = $this->article->categories->pluck('id')->toArray();
+                $this->title = $this->article->getTitle();
+                $this->intro = $this->article->getIntro();
+                $this->contents = $this->article->getContents();
+                $this->publish_at = $this->article->getPublishAt();
+            }
 
         }
     }
