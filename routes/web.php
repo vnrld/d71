@@ -40,6 +40,7 @@ Route::get('/articles/list', [ArticleController::class, 'listArticles'])->middle
     'dashboard.articles-list'
 );
 Route::get('/articles/{articleId}', [ArticleController::class, 'getArticle'])->middleware(['auth']);
+Route::get('/articles/preview/{articleId}', [ArticleController::class, 'previewArticle'])->middleware(['auth']);
 
 Route::get('/articles-categories', [CategoryController::class, 'all'])
     ->middleware(['auth'])->name('dashboard.articles-categories');

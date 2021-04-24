@@ -14,6 +14,10 @@ class ArticleController extends Controller
         return view('articles/articles-create');
     }
 
+    public function previewArticle(int $articleId) {
+        return view('articles/articles-preview')->with(['article' => Article::find($articleId)]);
+    }
+
     public function getArticleBySlug(string $slug)
     {
         try {

@@ -34,4 +34,10 @@ class Article extends GenericModel
         return $this->belongsToMany(Category::class, 'articles_categories', 'article_id', 'category_id');
     }
 
+    public function getHtml(): string
+    {
+        $parser = new \Parsedown();
+        return $parser->text($this->getContents());
+    }
+
 }

@@ -11,13 +11,14 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <table id="articles-list" style="border: #718096">
                         <tr>
-                            <td>Title</td><td>Created At</td><td>Publish At</td><td></td>
+                            <td>Title</td><td>Created At</td><td>Publish At</td><td></td><td></td>
                         </tr>
                         @foreach($articles as $article)
                             <td>{{$article->getTitle()}}</td>
                             <td>{{$article->getCreatedAt()}}</td>
                             <td>{{$article->getPublishAt()}}</td>
                             <td><a href="{{url('articles/' . $article->getId())}}">Edit</a></td>
+                            <td><a href="{{url('articles/preview/' . $article->getId())}}">Preview</a></td>
                         @endforeach
                     </table>
                 </div>
