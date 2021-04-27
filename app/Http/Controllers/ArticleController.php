@@ -18,13 +18,39 @@ class ArticleController extends Controller
         return view('articles/articles-preview')->with(['article' => Article::find($articleId)]);
     }
 
+    public function getArticles(int $offset = 1): View
+    {
+        $limit = 5;
+
+        $articles = Article::orderBy('id', 'desc')->limit($limit)->get();
+
+        $arr = [];
+        $arr['first'] = [];
+        $arr['posts'] = [];
+
+        foreach ($articles as $index => $article) {
+            if ($index === 0) {
+                $arr['first'] = $article;
+            } else {
+                $arr['posts'][] = $article;
+            }
+        }
+
+        $arr['posts'] = array_chunk($arr['posts'], 2);
+
+        return view('welcome')->with(['articles' => $arr]);
+    }
+
     public function getArticleBySlug(string $slug)
     {
-        try {
-            return view('frontend.article')->with(['article' => Article::where('slug', '=', $slug)->firstOfFail()]);
-        } catch (\Exception $exception) {
-            return redirect('/');
-        }
+       $article = Article::where('slug', '=', $slug)->first();
+
+       if ($article === null) {
+           return redirect('/');
+       }
+
+       return view('articles.article-page')->with(['article' => $article]);
+
     }
 
     public function listArticles(): View

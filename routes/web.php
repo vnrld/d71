@@ -16,11 +16,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get(
-    '/',
-    function () {
-        return view('welcome');
-    }
+    '/post/{slug}',
+    [ArticleController::class, 'getArticleBySlug']
 );
+
+Route::get(
+    '/',
+    [ArticleController::class, 'getArticles']
+);
+
+
 
 Route::get(
     '/dashboard',
