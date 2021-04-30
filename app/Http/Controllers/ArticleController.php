@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\View\View;
 
 class ArticleController extends Controller
@@ -44,10 +45,11 @@ class ArticleController extends Controller
     public function getArticleBySlug(string $slug)
     {
        $article = Article::where('slug', '=', $slug)->first();
-
        if ($article === null) {
            return redirect('/');
        }
+
+        ViewFacade::share(['pageTitle' => $article->getTitle()]);
 
        return view('articles.article-page')->with(['article' => $article]);
 

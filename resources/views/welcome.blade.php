@@ -16,12 +16,12 @@
 
                 <div class="w-full md:w-1/3 flex flex-col flex-grow flex-shrink">
                     <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-                        <p class="w-full text-gray-600 text-xs md:text-sm pt-6 px-6">{{$first->getTitle()}}</p>
+                        <p class="w-full text-gray-600 text-xs md:text-sm pt-6 px-6">{{$first->getPublishAt()}}</p>
                         <div class="w-full font-bold text-xl text-gray-900 px-6">
-                            {{$first->getIntro()}}
+                            {{$first->getTitle()}}
                         </div>
                         <p class="text-gray-800 font-serif text-base px-6 mb-5">
-                            {{$first->getContents()}}
+                            {{$first->getIntro()}}
                         </p>
                     </div>
 
@@ -47,13 +47,13 @@
             <!--1/2 col -->
             <div class="w-full md:w-1/2 p-6 flex flex-col flex-grow flex-shrink">
                 <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow-lg">
-                    <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                    <a href="{{url('/post', ['slug' => $post->getSlug()])}}" class="flex flex-wrap no-underline hover:no-underline">
                         <img src="https://source.unsplash.com/collection/3657445/800x600"
                              class="h-full w-full rounded-t pb-6">
-                        <p class="w-full text-gray-600 text-xs md:text-sm px-6">{{$post->getTitle()}}</p>
-                        <div class="w-full font-bold text-xl text-gray-900 px-6">Lorem ipsum dolor sit amet.</div>
+                        <p class="w-full text-gray-600 text-xs md:text-sm px-6">{{$post->getPublishAt()}}</p>
+                        <div class="w-full font-bold text-xl text-gray-900 px-6">{{$post->getTitle()}}</div>
                         <p class="text-gray-800 font-serif text-base px-6 mb-5">
-                            Lorem ipsum eu nunc commodo posuere et sit amet ligula.
+                            {{$post->getIntro()}}
                         </p>
                     </a>
                 </div>
@@ -95,20 +95,5 @@
     <!-- /Subscribe-->
 
 
-    <!--Author-->
-    <div class="flex w-full items-center font-sans p-8 md:p-24">
-        <img class="w-10 h-10 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of Author">
-        <div class="flex-1">
-            <p class="text-base font-bold text-base md:text-xl leading-none">Ghostwind CSS</p>
-            <p class="text-gray-600 text-xs md:text-base">Tailwind CSS version of Ghost's Casper theme by <a
-                        class="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500"
-                        href="https://www.tailwindtoolbox.com">TailwindToolbox.com</a></p>
-        </div>
-        <div class="justify-end">
-            <button class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">
-                Read More
-            </button>
-        </div>
-    </div>
-    <!--/Author-->
+
 </x-webpage-layout>

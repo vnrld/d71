@@ -8,20 +8,20 @@
     <meta name="author" content="name">
     <meta name="description" content="description here">
     <meta name="keywords" content="keywords,here">
-    <link href="https://unpkg.com/tailwindcss/dist/tailwind.min.css" rel="stylesheet"> <!--Replace with your tailwind.css once created-->
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
 
 </head>
-<body class="bg-gray-200 font-sans leading-normal tracking-normal">
+<body class="font-sans leading-normal tracking-normal">
 
 <!--Header-->
-<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url('cover.jpg'); height: 60vh; max-height:460px;">
+<div class="w-full m-0 p-0 bg-cover bg-bottom" style="background-image:url({{asset('images/digital-tunnel.jpg')}}); height: 60vh; max-height:460px;">
     <div class="container max-w-4xl mx-auto pt-16 md:pt-32 text-center break-normal">
         <!--Title-->
         <p class="text-white font-extrabold text-3xl md:text-5xl">
-            👻 Ghostwind CSS
+            D7i
         </p>
-        <p class="text-xl md:text-2xl text-gray-500">Welcome to my Blog</p>
+        <p class="text-xl md:text-2xl text-gray-500"></p>
     </div>
 </div>
 
@@ -67,6 +67,22 @@
         <!-- Page Content -->
         <main>
             {{ $slot }}
+            <!--Author-->
+                <div class="flex w-full items-center font-sans p-8 md:p-24">
+                    <img class="w-10 h-10 rounded-full mr-4" src="http://i.pravatar.cc/300" alt="Avatar of Author">
+                    <div class="flex-1">
+                        <p class="text-base font-bold text-base md:text-xl leading-none">Ghostwind CSS</p>
+                        <p class="text-gray-600 text-xs md:text-base">Tailwind CSS version of Ghost's Casper theme by <a
+                                    class="text-gray-800 hover:text-green-500 no-underline border-b-2 border-green-500"
+                                    href="https://www.tailwindtoolbox.com">TailwindToolbox.com</a></p>
+                    </div>
+                    <div class="justify-end">
+                        <button class="bg-transparent border border-gray-500 hover:border-green-500 text-xs text-gray-500 hover:text-green-500 font-bold py-2 px-4 rounded-full">
+                            Read More
+                        </button>
+                    </div>
+                </div>
+                <!--/Author-->
         </main>
 
     </div>
