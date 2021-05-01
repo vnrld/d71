@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\View\Code\Highlighter\PHP;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Str;
 
 /**
@@ -37,6 +37,10 @@ class Article extends GenericModel
     public function getHtml(): string
     {
         $parser = new \Parsedown();
+
+        $code = new PHP(__DIR__ . '/../View/Code/Highlighter/Highlighter.php');
+        $code->highlight();
+
         return $parser->text($this->getContents());
     }
 
