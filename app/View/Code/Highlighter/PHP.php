@@ -9,7 +9,7 @@ class PHP extends Highlighter
     public function __construct(string $codeOrPath)
     {
         parent::__construct($codeOrPath);
-        $this->processingVia = file_exists($codeOrPath) ? 'highlight_file': 'highlight_string';
+        $this->processingVia = file_exists($codeOrPath) ? 'highlight_file' : 'highlight_string';
     }
 
     public function highlight(bool $return = false)
@@ -29,7 +29,11 @@ class PHP extends Highlighter
 
         $this->processedCode = $function($this->codeOrPath, true);
 
-        $lala = explode('<br />', $this->processedCode);
+        $class = basename($this->theme, '.ini');
+
+        $this->processedCode = str_replace('<code>', '<code class="' . $class . '">', $this->processedCode);
+
+        $code = explode('<br />', $this->processedCode);
 
         $replacements = [
             ini_get('highlight.comment') => $this->themeConfig['highlight.comment'],
@@ -39,18 +43,21 @@ class PHP extends Highlighter
             ini_get('highlight.string') => $this->themeConfig['highlight.string']
         ];
 
-        foreach($lala as $i => $wartosc) {
-            echo strtr('<span class="code-line-number noselect">'
-                . ($i + 1) . str_repeat('&#160;', 5) . '</span>' . $wartosc  . '<br>' . PHP_EOL, $replacements);
+        foreach ($code as $i => $wartosc) {
+            echo strtr(
+                '<span class="code-line-number noselect">'
+                . ($i + 1) . str_repeat('&#160;', 5) . '</span>' . $wartosc . '<br>' . PHP_EOL,
+                $replacements
+            );
         }
 
         $this->processedCode = '';
 
-       //die();
+        //die();
 
 
-       // $this->convertBrs();
-       // $this->convertNbsp();
+        // $this->convertBrs();
+        // $this->convertNbsp();
         // $this->addLines();
 
     }
@@ -60,7 +67,7 @@ class PHP extends Highlighter
         $this->processedCode = (string)preg_replace('/<br\s*\/?>/', PHP_EOL . '<br>', $this->processedCode);
     }
 
-    private function convertNbsp() : void
+    private function convertNbsp(): void
     {
         $this->processedCode = str_replace('&nbsp;', '&#160;', $this->processedCode);
     }
@@ -71,7 +78,6 @@ class PHP extends Highlighter
 
 
         foreach ($lines as $index => &$line) {
-
             $line = ($index + 1) . '. ' . $line;
         }
 
