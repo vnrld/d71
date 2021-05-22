@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace REST\Annotations\Http\Controllers;
+namespace PHP8\Annotations\Http\Controllers;
 
-use REST\Annotations\Application\App;
-use REST\Annotations\Http\Responses\Response;
-use REST\Annotations\Http\Router\Route;
-use REST\Annotations\Repositories\Repository;
+use PHP8\Annotations\Application\App;
+use PHP8\Annotations\Http\Responses\Response;
+use PHP8\Annotations\Http\Router\Route;
+use PHP8\Annotations\Repositories\Repository;
 
 class Controller
 {
@@ -24,7 +24,7 @@ class Controller
     #[Route("/", methods: ["GET"])]
     public function healthcheck(): Response
     {
-        return new Response(['http_code' => 200, 'status' => 'OK']);
+        return new Response(['status' => 'OK']);
     }
 
     protected function getRepository(): Repository

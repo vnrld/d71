@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace REST\Annotations\Http\Requests;
+namespace PHP8\Annotations\Http\Requests;
 
 class Request
 {
@@ -22,4 +22,5 @@ class Request
     {
         return $this->server['REQUEST_METHOD'];
     }
+
 }

@@ -2,20 +2,11 @@
 
 declare(strict_types=1);
 
-namespace REST\Annotations\Repositories;
+namespace PHP8\Annotations\Repositories;
 
-class UserRepository extends Repository
+abstract class Repository
 {
-    protected array $data = [
-        [
-            'id' => '',
-            'name' => 'User 1'
-        ],
-        [
-            'id' => '',
-            'name' => 'User 2'
-        ],
-    ];
+    protected array $data = [];
 
     public function get(?string $id = null): array
     {
@@ -24,9 +15,6 @@ class UserRepository extends Repository
         }
 
         $arrayKey = array_search($id, array_column($this->data, 'id'));
-
-        var_dump($arrayKey);
-
         return $this->data[$arrayKey];
     }
 
@@ -38,5 +26,10 @@ class UserRepository extends Repository
     public function getAll(): array
     {
         return $this->get();
+    }
+
+    public function count(): int
+    {
+        return count($this->data);
     }
 }

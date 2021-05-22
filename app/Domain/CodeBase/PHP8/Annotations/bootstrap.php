@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use REST\Annotations\Application\App;
+use PHP8\Annotations\Application\App;
 
 // Use default autoload implementation
 spl_autoload_register(

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace REST\Annotations;
+namespace PHP8\Annotations;
 
-use REST\Annotations\Application\App;
+use PHP8\Annotations\Application\App;
 
 /**
  * @var App $app
